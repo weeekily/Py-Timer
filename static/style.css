@@ -1,0 +1,181 @@
+/* Reset / base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050712;
+    --bg-card: #111320;
+    --accent: #4f46e5;
+    --accent-soft: rgba(79, 70, 229, 0.15);
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-subtle: #1f2937;
+    --danger: #ef4444;
+    --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
+}
+
+/* Layout */
+body {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* Card */
+.card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
+    border-radius: 20px;
+    padding: 24px 22px 26px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    backdrop-filter: blur(20px);
+}
+
+/* Title */
+.app-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #e5e7eb, #a5b4fc, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form */
+.timer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.inputs-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.field input {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    -moz-appearance: textfield;
+}
+
+/* Hide arrows for number input */
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-soft);
+    background: rgba(15, 23, 42, 0.98);
+}
+
+/* Button */
+.btn-primary {
+    margin-top: 4px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    box-shadow: 0 14px 35px rgba(79, 70, 229, 0.7);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.55);
+}
+
+/* Timer display */
+.timer-display,
+.timer-placeholder {
+    margin-top: 8px;
+    padding: 14px 10px 6px;
+    border-radius: 16px;
+    background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-display {
+    font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 2.3rem;
+    letter-spacing: 0.12em;
+}
+
+.timer-placeholder {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .card {
+        padding: 20px 16px 22px;
+    }
+
+    .app-title {
+        font-size: 1.4rem;
+    }
+
+    .timer-display {
+        font-size: 2rem;
+        letter-spacing: 0.1em;
+    }
+}

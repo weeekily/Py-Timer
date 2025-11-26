@@ -3,47 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Py-Timer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h1>Py-Timer</h1>
+<div class="app-wrapper">
+    <div class="card">
+        <h1 class="app-title">Py-Timer</h1>
 
-<form method="post">
-    <input type="number" name="hours" placeholder="Hours" required>
-    <input type="number" name="minutes" placeholder="Minutes" required>
-    <input type="number" name="seconds" placeholder="Seconds" required>
-    <button type="submit">Start</button>
-</form>
+        <form method="post" class="timer-form">
+            <div class="inputs-row">
+                <div class="field">
+                    <label for="hours">Hours</label>
+                    <input type="number" id="hours" name="hours" min="0" placeholder="0" required>
+                </div>
+
+                <div class="field">
+                    <label for="minutes">Minutes</label>
+                    <input type="number" id="minutes" name="minutes" min="0" max="59" placeholder="0" required>
+                </div>
+
+                <div class="field">
+                    <label for="seconds">Seconds</label>
+                    <input type="number" id="seconds" name="seconds" min="0" max="59" placeholder="0" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Start</button>
+        </form>
+
+        {% if total %}
+            <div class="timer-display" id="timer"></div>
+        {% else %}
+            <div class="timer-placeholder">
+                Enter time and press Start
+            </div>
+        {% endif %}
+    </div>
+</div>
 
 {% if total %}
-    <h2 id="timer"></h2>
+<script>
+    let total = {{ total }};
 
-    <script>
-        let total = {{ total }};
+    function tick() {
+        let h = Math.floor(total / 3600);
+        let m = Math.floor((total % 3600) / 60);
+        let s = total % 60;
 
-        function tick() {
-            let h = Math.floor(total / 3600);
-            let m = Math.floor((total % 3600) / 60);
-            let s = total % 60;
+        let timeString =
+            String(h).padStart(2, '0') + ":" +
+            String(m).padStart(2, '0') + ":" +
+            String(s).padStart(2, '0');
 
+        document.getElementById("timer").textContent = timeString;
 
-            let timeString =
-                String(h).padStart(2, '0') + ":" +
-                String(m).padStart(2, '0') + ":" +
-                String(s).padStart(2, '0');
-
-            document.getElementById("timer").textContent = timeString;
-
-            if (total > 0) {
-                total--;
-                setTimeout(tick, 1000);
-            } else {
-                document.getElementById("timer").textContent = "TIME'S UP!";
-            }
+        if (total > 0) {
+            total--;
+            setTimeout(tick, 1000);
+        } else {
+            document.getElementById("timer").textContent = "TIME'S UP!";
         }
+    }
 
-        tick();
-    </script>
+    tick();
+</script>
 {% endif %}
 
 </body>
